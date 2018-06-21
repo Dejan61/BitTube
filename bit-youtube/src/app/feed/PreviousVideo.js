@@ -13,10 +13,10 @@ class PreviousVideo extends React.Component {
         return (
             <div className="row previousVideo">
                 <div className='col-6'>
-                    <img src="https://i.ytimg.com/vi/VNL5rrsz8MY/mqdefault.jpg" alt="image" />
+                    <img src={this.props.image} id={this.props.id} onClick={this.handler} alt="image" />
                 </div>
                 <div className='col-6'>
-                    <p>Dejan Atanackovic</p>
+                    <p>{this.props.title}</p>
                 </div>
             </div>
         )

@@ -20,30 +20,46 @@ class FeedPage extends React.Component {
         }
         this.collectValue = this.collectValue.bind(this);
         this.collectId = this.collectId.bind(this);
+
     }
+
 
     collectValue(searchInput) {
         this.loadVideo(searchInput);
     }
 
     loadVideo(keyword) {
+
         this.setState({
             loading: true
         }, () => {
             videoServices.getVideo(keyword)
                 .then(video => {
-
                     this.setState({
                         videoId: video.id,
                         videoUrl: 'https://www.youtube.com/embed/' + video.id,
                         loading: false
                     })
+                    this.loadSuggestedVideos(video.id);
+                    let local = localStorage.getItem('videos');
 
-                    this.loadSuggestedVideos(video.id)
+                    if (!local) {
+                        let previousVideos = [];
+                        previousVideos.push(video);
+                        localStorage.setItem('videos', JSON.stringify(previousVideos));
+                    } else {
+                        if (!local.includes(JSON.stringify(video))) {
+                            local = JSON.parse(local);
+                            if (local.length > 8) {
+                                local.length = 8
+                            }
+                            local.splice(0, 0, video);
+                            localStorage.setItem('videos', JSON.stringify(local));
+                        }
+                    }
                 }
                 );
         })
-
     }
 
     loadSuggestedVideos(videoId) {
