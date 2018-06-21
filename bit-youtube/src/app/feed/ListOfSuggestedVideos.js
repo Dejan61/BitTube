@@ -4,9 +4,9 @@ import SuggestedVideo from './SuggestedVideo';
 const ListOfSuggestedVideos = (props) => {
 
     return (
-        <div className='listOfSuggVideos'>
+        <div>
             {props.videos.map(video => {
-                return <SuggestedVideo id={video.id} image={video.image} title={video.title} collectId={props.collectId} />
+                return <SuggestedVideo key={video.id} id={video.id} image={video.image} title={video.title} collectId={props.collectId} />
             })}
 
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SuggestedVideo extends React.Component {
+class PreviousVideo extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -11,16 +11,16 @@ class SuggestedVideo extends React.Component {
 
     render() {
         return (
-            <div className="row suggestedVideo">
+            <div className="row previousVideo">
                 <div className='col-6'>
-                    <img src={this.props.image} alt="image" id={this.props.id} onClick={this.handler} />
+                    <img src="https://i.ytimg.com/vi/VNL5rrsz8MY/mqdefault.jpg" alt="image" />
                 </div>
                 <div className='col-6'>
-                    <p>{this.props.title}</p>
+                    <p>Dejan Atanackovic</p>
                 </div>
             </div>
         )
     }
 }
 
-export default SuggestedVideo;
+export default PreviousVideo;
