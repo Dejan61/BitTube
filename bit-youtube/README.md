@@ -1,0 +1,16 @@
+app/
+  feed/
+    VideoPlayer.js
+    SearchBar.js
+    SuggestedVideo.js
+    PreviousVisited.js
+entities/
+  Video.js
+partials/
+  header/
+    Header.js
+  footer/
+    Footer.js
+services/
+  videoServices.js
+shared/
