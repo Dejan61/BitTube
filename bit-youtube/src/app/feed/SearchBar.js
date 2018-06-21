@@ -1,4 +1,5 @@
 import React from 'react';
+import { debounce } from 'lodash';
 
 class Search extends React.Component {
     constructor(props) {
@@ -7,6 +8,11 @@ class Search extends React.Component {
         this.state = {
             inputText: ""
         }
+        this.collectValue = debounce(this.collectValue, 2000);
+
+    }
+    collectValue = (value) => {
+        this.props.collectValue(value);
     }
 
     handleInput = (event) => {
@@ -17,7 +23,7 @@ class Search extends React.Component {
 
     handleValue = (event) => {
         if (event.keyCode === 13) {
-            this.props.collectValue(event.target.value);
+            this.collectValue(event.target.value)
             this.setState({
                 inputText: ""
             })
