@@ -3,6 +3,7 @@ import videoServices from '../../services/videoServices';
 import VideoPlayer from './VideoPlayer';
 import SearchBar from './SearchBar';
 import Loading from '../../partials/loading/Loading';
+import ListOfSuggestedVideos from './ListOfSuggestedVideos';
 
 
 class FeedPage extends React.Component {
@@ -10,18 +11,16 @@ class FeedPage extends React.Component {
         super(props)
 
         this.state = {
+            videoId: 'N1_SXZs_sXo',
             videoUrl: "",
             searchInput: "",
-            loading: true
+            loading: true,
+            suggestedVideos: []
         }
         this.collectValue = this.collectValue.bind(this);
     }
 
     collectValue(searchInput) {
-        this.setState({
-            searchInput
-        })
-
         this.loadVideo(searchInput);
     }
 
@@ -30,19 +29,32 @@ class FeedPage extends React.Component {
             loading: true
         }, () => {
             videoServices.getVideo(keyword)
-                .then(videoId =>
+                .then(videoId => {
                     this.setState({
+                        videoId,
                         videoUrl: 'https://www.youtube.com/embed/' + videoId,
                         loading: false
                     })
 
+                    this.loadSuggestedVideos(videoId)
+                }
                 );
         })
 
     }
 
+    loadSuggestedVideos(videoId) {
+        videoServices.getSuggestedVideos(videoId)
+            .then(videos => {
+                console.log(videos);
+                this.setState({
+                    suggestedVideos: videos
+                })
+            })
+    }
+
     componentDidMount() {
-        this.loadVideo(this.state.searchInput)
+        this.loadVideo(this.state.searchInput);
     }
 
     render() {
@@ -52,8 +64,11 @@ class FeedPage extends React.Component {
                     <SearchBar collectValue={this.collectValue} />
                 </div>
                 <div className='row'>
-                    <div className='col-6 offset-3 videoPlayer'>
+                    <div className='col-6 offset-1 videoPlayer'>
                         {(this.state.loading) ? <Loading /> : <VideoPlayer videoUrl={this.state.videoUrl} />}
+                    </div>
+                    <div className='col-4 offset-1'>
+                        <ListOfSuggestedVideos videos={this.state.suggestedVideos} />
                     </div>
                 </div>
             </div>

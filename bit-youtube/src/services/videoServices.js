@@ -1,11 +1,13 @@
-import { key } from '../shared/constants.js';
+import { key, url } from '../shared/constants.js';
 import axios from 'axios';
+import SuggestedVideos from '../entitites/SuggestedVideo';
+import SuggestedVideo from '../entitites/SuggestedVideo';
 
 
 class VideoServices {
 
     getVideo(searchInput) {
-        return axios.get('https://www.googleapis.com/youtube/v3/search', {
+        return axios.get(url, {
             params: {
                 part: 'snippet',
                 key: key,
@@ -14,6 +16,24 @@ class VideoServices {
             }
         }).then(response => response.data)
             .then(data => data.items[0].id.videoId)
+    }
+
+    getSuggestedVideos(id) {
+        return axios.get(url, {
+            params: {
+                part: 'snippet',
+                relatedToVideoId: id,
+                type: 'video',
+                key: key
+            }
+        }).then(response => response.data)
+            .then(data => {
+                const videos = data.items;
+                return videos.map(video => {
+                    return new SuggestedVideo(video.id.videoId);
+                })
+            }
+            )
     }
 }
 
