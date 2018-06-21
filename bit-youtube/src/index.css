@@ -120,5 +120,10 @@ footer {
   margin-top: 50px;
 }
 .suggestedVideo {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+img {
+  width: 100%;
+  cursor: pointer;
 }

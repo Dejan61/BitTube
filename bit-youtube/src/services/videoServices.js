@@ -24,13 +24,14 @@ class VideoServices {
                 part: 'snippet',
                 relatedToVideoId: id,
                 type: 'video',
-                key: key
+                key: key,
+                maxResults: 8
             }
         }).then(response => response.data)
             .then(data => {
                 const videos = data.items;
                 return videos.map(video => {
-                    return new SuggestedVideo(video.id.videoId);
+                    return new SuggestedVideo(video.id.videoId, video.snippet.thumbnails.medium.url, video.snippet.title);
                 })
             }
             )

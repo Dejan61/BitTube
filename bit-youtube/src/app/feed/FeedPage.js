@@ -11,13 +11,14 @@ class FeedPage extends React.Component {
         super(props)
 
         this.state = {
-            videoId: 'N1_SXZs_sXo',
+            videoId: '',
             videoUrl: "",
             searchInput: "",
             loading: true,
             suggestedVideos: []
         }
         this.collectValue = this.collectValue.bind(this);
+        this.collectId = this.collectId.bind(this);
     }
 
     collectValue(searchInput) {
@@ -46,11 +47,14 @@ class FeedPage extends React.Component {
     loadSuggestedVideos(videoId) {
         videoServices.getSuggestedVideos(videoId)
             .then(videos => {
-                console.log(videos);
                 this.setState({
                     suggestedVideos: videos
                 })
             })
+    }
+
+    collectId(id) {
+        this.loadVideo(id)
     }
 
     componentDidMount() {
@@ -68,7 +72,7 @@ class FeedPage extends React.Component {
                         {(this.state.loading) ? <Loading /> : <VideoPlayer videoUrl={this.state.videoUrl} />}
                     </div>
                     <div className='col-4 offset-1'>
-                        <ListOfSuggestedVideos videos={this.state.suggestedVideos} />
+                        <ListOfSuggestedVideos videos={this.state.suggestedVideos} collectId={this.collectId} />
                     </div>
                 </div>
             </div>
