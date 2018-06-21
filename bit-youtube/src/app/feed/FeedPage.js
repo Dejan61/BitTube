@@ -4,6 +4,7 @@ import VideoPlayer from './VideoPlayer';
 import SearchBar from './SearchBar';
 import Loading from '../../partials/loading/Loading';
 import ListOfSuggestedVideos from './ListOfSuggestedVideos';
+import ListOfPreviousVideos from './ListOfPreviousVideos';
 
 
 class FeedPage extends React.Component {
@@ -30,14 +31,15 @@ class FeedPage extends React.Component {
             loading: true
         }, () => {
             videoServices.getVideo(keyword)
-                .then(videoId => {
+                .then(video => {
+
                     this.setState({
-                        videoId,
-                        videoUrl: 'https://www.youtube.com/embed/' + videoId,
+                        videoId: video.id,
+                        videoUrl: 'https://www.youtube.com/embed/' + video.id,
                         loading: false
                     })
 
-                    this.loadSuggestedVideos(videoId)
+                    this.loadSuggestedVideos(video.id)
                 }
                 );
         })
@@ -69,9 +71,16 @@ class FeedPage extends React.Component {
                 </div>
                 <div className='row'>
                     <div className='col-6 offset-1 videoPlayer'>
-                        {(this.state.loading) ? <Loading /> : <VideoPlayer videoUrl={this.state.videoUrl} />}
+                        <div className='col-12'>
+                            {(this.state.loading) ? <Loading /> : <VideoPlayer videoUrl={this.state.videoUrl} />}
+                        </div>
+                        <div className='col-10 offset-1 listOfPrevVideos'>
+                            <p>Previous played videos</p>
+                            <ListOfPreviousVideos videos={this.state.previousVideos} collectId={this.collectId} />
+                        </div>
                     </div>
-                    <div className='col-4 offset-1'>
+                    <div className='col-4 offset-1 listOfSuggVideos'>
+                        <p>Reccomended Videos</p>
                         <ListOfSuggestedVideos videos={this.state.suggestedVideos} collectId={this.collectId} />
                     </div>
                 </div>

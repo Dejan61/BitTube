@@ -1,7 +1,7 @@
 import { key, url } from '../shared/constants.js';
 import axios from 'axios';
-import SuggestedVideos from '../entitites/SuggestedVideo';
-import SuggestedVideo from '../entitites/SuggestedVideo';
+import Video from '../entities/Video';
+
 
 
 class VideoServices {
@@ -15,7 +15,10 @@ class VideoServices {
                 maxResults: 1
             }
         }).then(response => response.data)
-            .then(data => data.items[0].id.videoId)
+            .then(data => data.items[0])
+            .then(video => {
+                return new Video(video.id.videoId, video.snippet.thumbnails.medium.url, video.snippet.title);
+            })
     }
 
     getSuggestedVideos(id) {
@@ -31,7 +34,7 @@ class VideoServices {
             .then(data => {
                 const videos = data.items;
                 return videos.map(video => {
-                    return new SuggestedVideo(video.id.videoId, video.snippet.thumbnails.medium.url, video.snippet.title);
+                    return new Video(video.id.videoId, video.snippet.thumbnails.medium.url, video.snippet.title);
                 })
             }
             )

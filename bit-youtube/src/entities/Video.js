@@ -1,4 +1,4 @@
-class SuggestedVideo {
+class Video {
     constructor(id, image, title) {
         this.id = id;
         this.image = image;
@@ -6,4 +6,4 @@ class SuggestedVideo {
     }
 }
 
-export default SuggestedVideo;
+export default Video;

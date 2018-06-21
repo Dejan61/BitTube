@@ -116,11 +116,11 @@ footer {
 
 /********* LIST OF SUGGESTED VIDEOS ******/
 
-.listOfSuggVideos {
+.listOfSuggVideos, .listOfPrevVideos {
   margin-top: 50px;
 }
-.suggestedVideo {
-  margin-bottom: 20px;
+.suggestedVideo, .previousVideo {
+  margin-top: 20px;
 }
 
 img {
