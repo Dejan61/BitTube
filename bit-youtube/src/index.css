@@ -41,6 +41,13 @@ footer {
   margin-top:20px;
   padding: 20px;
   text-align: center;
+  background:linear-gradient( rgb(41, 118, 243), rgb(1, 72, 185));
+  box-shadow: 0px 9px 21px -6px rgba(138, 138, 138, 0.57);
+  color: white;
+}
+
+footer p {
+  margin-top: 15px;
 }
 
 /********* VIDEO PLAYER ********/
