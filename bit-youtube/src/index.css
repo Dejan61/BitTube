@@ -2,4 +2,43 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  height: 100vh;
+}
+
+/******* HEADER *********/
+
+header {
+  color: white;
+  padding: 20px;
+  background:linear-gradient( rgb(41, 118, 243), rgb(1, 72, 185));
+  box-shadow: 0px 9px 21px -6px rgba(138, 138, 138, 0.57);
+}
+
+header a {
+  color: white;
+}
+
+header a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+#tube{
+  background: orange;
+  border-radius: 5px;
+  margin-left: 2px;
+  padding: 2px;
+  color: black;
+}
+/*********   FOOTER   **********/
+
+footer {
+  width: 100%;
+  margin-top:20px;
+  padding: 20px;
+  text-align: center;
 }
