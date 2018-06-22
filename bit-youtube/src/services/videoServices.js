@@ -17,6 +17,9 @@ class VideoServices {
         }).then(response => response.data)
             .then(data => data.items[0])
             .then(video => {
+                if (!video) {
+                    return null
+                }
                 return new Video(video.id.videoId, video.snippet.thumbnails.medium.url, video.snippet.title);
             })
     }

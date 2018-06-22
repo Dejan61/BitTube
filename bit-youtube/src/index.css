@@ -134,3 +134,16 @@ img {
   width: 100%;
   cursor: pointer;
 }
+
+/******* VIDEO NOT FOUND  ********/
+
+#videoNotFound {
+  font-size: 240%;
+  text-align: center;
+  color: rgb(122, 122, 122);
+  margin: 10% auto; 
+}
+
+#videoNotFound i {
+  font-size: 200%;
+}

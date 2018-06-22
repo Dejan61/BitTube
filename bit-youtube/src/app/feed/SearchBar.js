@@ -19,21 +19,13 @@ class Search extends React.Component {
         this.setState({
             inputText: event.target.value
         })
-    }
-
-    handleValue = (event) => {
-        if (event.keyCode === 13) {
-            this.collectValue(event.target.value)
-            this.setState({
-                inputText: ""
-            })
-        }
+        this.collectValue(event.target.value);
     }
 
     render() {
         return (
             <div className='search col-12'>
-                <i className="fa fa-search"></i><input type='text' value={this.state.inputText} onChange={this.handleInput} onKeyUp={this.handleValue} placeholder="Search for some videos" />
+                <i className="fa fa-search"></i><input type='text' value={this.state.inputText} onChange={this.handleInput} placeholder="Search for some videos" />
             </div>
         )
     }
